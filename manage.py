@@ -15,9 +15,14 @@ DATABASES = {
         }
     }
 
-MIDDLEWARE_CLASSES = [
-    'breadcrumbs.middleware.BreadcrumbsMiddleware',
-    ]
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request'
+)
 
 PROJECT_APPS = [
     'crumbs',
@@ -51,13 +56,13 @@ if __name__ == "__main__":
     settings.configure(
         DATABASES = DATABASES,
         INSTALLED_APPS = INSTALLED_APPS,
-        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES,
         PROJECT_APPS = PROJECT_APPS,
         JENKINS_TASKS = JENKINS_TASKS,
         ROOT_URLCONF = ROOT_URLCONF,
         COVERAGE_EXCLUDES_FOLDERS = COVERAGE_EXCLUDES_FOLDERS,
         PYLINT_RCFILE = PYLINT_RCFILE,
         TEMPLATE_DIRS = TEMPLATE_DIRS,
+        TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS,
         TEMPLATE_DEBUG = TEMPLATE_DEBUG,
         )
     execute_manager(settings)
