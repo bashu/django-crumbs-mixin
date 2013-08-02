@@ -7,14 +7,14 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django-crumbs',
+    name='django-crumbs-mixin',
     version='0.1',
     packages=['crumbs'],
     include_package_data=True,
     license='BSD License',
     description='Put short description here...',
     long_description=README,
-    url='http://github.com/bashu/django-crumbs',
+    url='http://github.com/bashu/django-crumbs-mixin',
     author='Basil Shubin',
     author_email='basil.shubin@gmail.com',
     install_requires=[
