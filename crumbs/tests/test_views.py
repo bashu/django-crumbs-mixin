@@ -17,6 +17,10 @@ class CrumbsTest(TestCase):
     def tearDown(self):
         settings.MIDDLEWARE_CLASSES = self.old_MIDDLEWARE_CLASSES
 
+    def test_default(self):
+        response = self.client.get(reverse('test_view'))
+        self.failUnless(hasattr(response.context['request'], 'breadcrumbs'))
+
     def test_context_data(self):
         response = self.client.get(reverse('test_view'))
         self.assertEqual(response.context['show_crumbs'], True)
