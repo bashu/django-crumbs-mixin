@@ -16,10 +16,10 @@ setup(
     long_description=README,
     url='http://github.com/bashu/django-crumbs',
     author='Basil Shubin',
+    author_email='basil.shubin@gmail.com',
     install_requires=[
         'django-breadcrumbs',
     ],
-    author_email='basil.shubin@gmail.com',
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',

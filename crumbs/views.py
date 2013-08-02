@@ -1,7 +1,5 @@
 # -*- coding: utf-8 -*-
 
-__all__ = ['CrumbsMixin']
-
 
 class CrumbsMixin(object):
 
@@ -14,4 +12,5 @@ class CrumbsMixin(object):
             context['show_crumbs'] = True
         else:
             context['show_crumbs'] = False
-        return super(CrumbsMixin, self).render_to_response(context, **response_kwargs)
+        return super(CrumbsMixin, self).render_to_response(
+            context, **response_kwargs)
