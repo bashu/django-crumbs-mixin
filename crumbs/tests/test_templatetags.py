@@ -7,14 +7,12 @@ from django.template import loader, Context
 
 from breadcrumbs.breadcrumbs import Breadcrumbs
 
-html = """{% load crumbs_tags %}{% breadcrumbs object %}"""
-
 
 class BreadcrumbsTest(TestCase):
 
     @property
     def t(self):
-        return loader.get_template_from_string(html)
+        return loader.get_template_from_string("""{% load crumbs_tags %}{% breadcrumbs object %}""")
 
     def setUp(self):
         self.base_url = 'http://testserver'
