@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'breadcrumbs',
 
     'django_jenkins',
+    'discover_runner',
     ] + PROJECT_APPS
 
 ROOT_URLCONF = 'test_urls'
@@ -40,12 +41,15 @@ TEMPLATE_DIRS = [
     os.path.join(PROJECT_ROOT, 'test_templates'),
     ]
 
+TEST_RUNNER = 'discover_runner.DiscoverRunner'
+
 JENKINS_TASKS = (
-    'django_jenkins.tasks.run_pylint',
-    'django_jenkins.tasks.run_pep8',
-    'django_jenkins.tasks.run_pyflakes',
     'django_jenkins.tasks.with_coverage',
     'django_jenkins.tasks.django_tests',
+    'django_jenkins.tasks.dir_tests',
+    'django_jenkins.tasks.run_pyflakes',
+    'django_jenkins.tasks.run_pylint',
+    'django_jenkins.tasks.run_pep8',
     )
 
 COVERAGE_EXCLUDES_FOLDERS = ['crumbs/tests/*']
@@ -57,6 +61,7 @@ if __name__ == "__main__":
         DATABASES = DATABASES,
         INSTALLED_APPS = INSTALLED_APPS,
         PROJECT_APPS = PROJECT_APPS,
+        TEST_RUNNER = TEST_RUNNER,
         JENKINS_TASKS = JENKINS_TASKS,
         ROOT_URLCONF = ROOT_URLCONF,
         COVERAGE_EXCLUDES_FOLDERS = COVERAGE_EXCLUDES_FOLDERS,

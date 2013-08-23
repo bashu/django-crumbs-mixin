@@ -9,6 +9,8 @@ class CrumbsTest(TestCase):
 
     def setUp(self):
         self.base_url = 'http://testserver'
+        self.view_url = reverse('test_view')
+
         self.old_MIDDLEWARE_CLASSES = settings.MIDDLEWARE_CLASSES
         middleware_class = 'breadcrumbs.middleware.BreadcrumbsMiddleware'
         if middleware_class not in settings.MIDDLEWARE_CLASSES:
@@ -17,12 +19,12 @@ class CrumbsTest(TestCase):
     def tearDown(self):
         settings.MIDDLEWARE_CLASSES = self.old_MIDDLEWARE_CLASSES
 
-    def test_default(self):
-        response = self.client.get(reverse('test_view'))
+    def test_crumbs(self):
+        response = self.client.get(self.view_url)
         self.failUnless(hasattr(response.context['request'], 'breadcrumbs'))
 
     def test_context_data(self):
-        response = self.client.get(reverse('test_view'))
+        response = self.client.get(self.view_url)
         self.assertEqual(response.context['show_crumbs'], True)
 
 
@@ -30,7 +32,8 @@ class NoCrumbsTest(TestCase):
 
     def setUp(self):
         self.base_url = 'http://testserver'
+        self.view_url = reverse('test_view')
 
     def test_context_data(self):
-        response = self.client.get(reverse('test_view'))
+        response = self.client.get(self.view_url)
         self.assertEqual(response.context['show_crumbs'], False)
