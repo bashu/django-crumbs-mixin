@@ -7,7 +7,7 @@ good-names=_,i,j,f,k,e,u,qs,pk,setUp,tearDown
 bad-functions=map,apply,input
 
 [MESSAGES CONTROL]
-disable=C0111,R0924,W0142,W0212,W0232
+disable=C0111,R0921,R0924,W0142,W0212,W0232
 
 [VARIABLES]
 dummy-variables-rgx=_|created|sender
