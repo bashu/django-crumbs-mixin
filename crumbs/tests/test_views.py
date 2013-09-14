@@ -34,6 +34,15 @@ class NoCrumbsTest(TestCase):
         self.base_url = 'http://testserver'
         self.view_url = reverse('test_view')
 
+        self.old_MIDDLEWARE_CLASSES = settings.MIDDLEWARE_CLASSES
+        middleware_class = 'breadcrumbs.middleware.BreadcrumbsMiddleware'
+        for x, m in enumerate(settings.MIDDLEWARE_CLASSES):
+            if m.startswith(middleware_class):
+                settings.MIDDLEWARE_CLASSES.pop(x)
+
+    def tearDown(self):
+        settings.MIDDLEWARE_CLASSES = self.old_MIDDLEWARE_CLASSES
+
     def test_context_data(self):
         response = self.client.get(self.view_url)
         self.assertEqual(response.context['show_crumbs'], False)
