@@ -18,7 +18,7 @@ setup(
     author='Basil Shubin',
     author_email='basil.shubin@gmail.com',
     install_requires=[
-        'django-breadcrumbs',
+        'django-breadcrumbs==1.1.3-p1',
     ],
     classifiers=[
         'Environment :: Web Environment',
