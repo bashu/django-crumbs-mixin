@@ -15,6 +15,10 @@ DATABASES = {
         }
     }
 
+MIDDLEWARE_CLASSES = [
+    'breadcrumbs.middleware.BreadcrumbsMiddleware',
+]
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
@@ -44,12 +48,9 @@ TEMPLATE_DIRS = [
 TEST_RUNNER = 'discover_runner.DiscoverRunner'
 
 JENKINS_TASKS = (
-    'django_jenkins.tasks.with_coverage',
-    'django_jenkins.tasks.django_tests',
-    'django_jenkins.tasks.dir_tests',
-    'django_jenkins.tasks.run_pyflakes',
+    'django_jenkins.tasks.run_flake8',
     'django_jenkins.tasks.run_pylint',
-    'django_jenkins.tasks.run_pep8',
+    'django_jenkins.tasks.with_coverage',
     )
 
 COVERAGE_EXCLUDES_FOLDERS = ['crumbs/tests/*']
@@ -59,6 +60,7 @@ if __name__ == "__main__":
     from django.conf import settings
     settings.configure(
         DATABASES = DATABASES,
+        MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES,
         INSTALLED_APPS = INSTALLED_APPS,
         PROJECT_APPS = PROJECT_APPS,
         TEST_RUNNER = TEST_RUNNER,
