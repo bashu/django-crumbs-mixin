@@ -7,16 +7,15 @@ from django.core.cache import cache
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import get_current_site
 
-CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
-CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 1800)
-
 
 class CrumbsMixin(object):
+    cache_prefix = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
+    cache_timeout = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 1800)
 
     def get_cache_key(self):
         current_site = get_current_site(self.request)
 
-        return '%s:%s' % (CACHE_PREFIX, hashlib.md5(smart_str('%s%s' % (
+        return '%s:%s' % (self.cache_prefix, hashlib.md5(smart_str('%s%s' % (
             current_site.domain, self.request.path_info))).hexdigest())
 
     def get_crumbs(self, context):
@@ -28,7 +27,7 @@ class CrumbsMixin(object):
         crumbs = cache.get(cache_key)
         if not crumbs:
             crumbs = self.get_crumbs(context)
-            cache.set(cache_key, crumbs, CACHE_TIMEOUT)
+            cache.set(cache_key, crumbs, self.cache_timeout)
         return crumbs
 
     def render_to_response(self, context, **response_kwargs):
