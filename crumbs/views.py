@@ -10,7 +10,7 @@ from django.contrib.sites.models import get_current_site
 
 class CrumbsMixin(object):
     cache_prefix = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
-    cache_timeout = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 1800)
+    cache_timeout = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
 
     def get_cache_key(self):
         current_site = get_current_site(self.request)
