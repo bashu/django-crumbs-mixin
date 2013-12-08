@@ -7,10 +7,18 @@ from django.core.cache import cache
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import get_current_site
 
+CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
+CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
+
 
 class CrumbsMixin(object):
-    cache_prefix = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
-    cache_timeout = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
+
+    def __init__(self, *args, **kwargs):
+        super(CrumbsMixin, self).__init__(*args, **kwargs)
+        if not hasattr(self, 'cache_prefix'):
+            self.cache_prefix = CACHE_PREFIX
+        if not hasattr(self, 'cache_timeout'):
+            self.cache_timeout = CACHE_TIMEOUT
 
     def get_cache_key(self):
         current_site = get_current_site(self.request)
