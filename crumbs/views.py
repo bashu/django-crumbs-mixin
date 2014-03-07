@@ -46,3 +46,6 @@ class CrumbsMixin(object):
             context['show_crumbs'] = False
         return super(CrumbsMixin, self).render_to_response(
             context, **response_kwargs)
+
+    def invalidate_cache(self):
+        cache.delete(self.get_cache_key())
