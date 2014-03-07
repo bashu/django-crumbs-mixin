@@ -11,6 +11,11 @@ CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
 CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
 
 
+def generate_cache_key(self, domain, path, prefix):
+    return '%s:%s' % (cache_prefix, hashlib.md5(smart_str('%s%s' % (
+        domain, path))).hexdigest())
+
+
 class CrumbsMixin(object):
 
     def __init__(self, *args, **kwargs):
@@ -23,8 +28,8 @@ class CrumbsMixin(object):
     def get_cache_key(self):
         current_site = get_current_site(self.request)
 
-        return '%s:%s' % (self.cache_prefix, hashlib.md5(smart_str('%s%s' % (
-            current_site.domain, self.request.path_info))).hexdigest())
+        return generate_cache_key(
+            current_site.domain, self.request.path_info, self.cache_prefix)
 
     def get_crumbs(self, context):
         raise NotImplementedError
@@ -46,6 +51,3 @@ class CrumbsMixin(object):
             context['show_crumbs'] = False
         return super(CrumbsMixin, self).render_to_response(
             context, **response_kwargs)
-
-    def invalidate_cache(self):
-        cache.delete(self.get_cache_key())
