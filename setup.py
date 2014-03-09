@@ -18,9 +18,6 @@ setup(
     author='Basil Shubin',
     author_email='basil.shubin@gmail.com',
     install_requires=[
-        'dill>=0.2b1',
-        'django-celery>=3.0,<3.1',
-        'django-cacheback>=0.5',
         'django-breadcrumbs==1.1.3-p1',
     ],
     classifiers=[
