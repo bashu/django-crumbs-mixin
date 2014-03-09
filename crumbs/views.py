@@ -11,7 +11,7 @@ CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
 CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
 
 
-def make_cache_key(domain, path, prefix):
+def make_cache_key(domain, path, cache_prefix):
     return '%s:%s' % (cache_prefix, hashlib.md5(smart_str('%s%s' % (
         domain, path))).hexdigest())
 
