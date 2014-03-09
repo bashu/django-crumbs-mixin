@@ -21,9 +21,17 @@ class CrumbsMixin(object):
     def __init__(self, *args, **kwargs):
         super(CrumbsMixin, self).__init__(*args, **kwargs)
         if not hasattr(self, 'cache_prefix'):
-            self.cache_prefix = CACHE_PREFIX
+            self._cache_prefix = CACHE_PREFIX
         if not hasattr(self, 'cache_timeout'):
-            self.cache_timeout = CACHE_TIMEOUT
+            self._cache_timeout = CACHE_TIMEOUT
+
+    @property
+    def cache_prefix(self):
+        return self._cache_prefix
+
+    @property
+    def cache_timeout(self):
+        return self._cache_timeout
 
     def get_cache_key(self):
         current_site = get_current_site(self.request)
