@@ -33,7 +33,7 @@ class CrumbsMixin(object):
     def cache_timeout(self):
         return self._cache_timeout
 
-    def get_cache_key(self):
+    def get_crumbs_cache_key(self):
         current_site = get_current_site(self.request)
 
         return make_cache_key(
@@ -43,7 +43,7 @@ class CrumbsMixin(object):
         raise NotImplementedError
 
     def get_breadcrumbs(self, context):
-        cache_key = self.get_cache_key()
+        cache_key = self.get_crumbs_cache_key()
 
         crumbs = cache.get(cache_key)
         if not crumbs:
