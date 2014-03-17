@@ -1,5 +1,5 @@
 django>=1.4,<1.5
-django-breadcrumbs==1.1.3-p1
+django-breadcrumbs>=1.1.3-p1
 django-discover-runner
 git+https://github.com/kmmbvnr/django-jenkins.git#egg=django-jenkins
 flake8

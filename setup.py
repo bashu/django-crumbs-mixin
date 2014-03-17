@@ -8,7 +8,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-crumbs-mixin',
-    version='0.1.4',
+    version='0.1.4.1',
     packages=['crumbs'],
     include_package_data=True,
     license='BSD License',
@@ -18,7 +18,7 @@ setup(
     author='Basil Shubin',
     author_email='basil.shubin@gmail.com',
     install_requires=[
-        'django-breadcrumbs==1.1.3-p1',
+        'django-breadcrumbs>=1.1.3-p1',
     ],
     classifiers=[
         'Environment :: Web Environment',
