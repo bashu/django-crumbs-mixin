@@ -11,7 +11,7 @@ CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
 CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
 
 
-def make_cache_key(domain, path, cache_prefix):
+def make_cache_key(domain, path, cache_prefix=CACHE_PREFIX):
     return '%s:%s' % (cache_prefix, hashlib.md5(smart_str('%s%s' % (
         domain, path))).hexdigest())
 
@@ -20,27 +20,13 @@ class CrumbsMixin(object):
 
     def __init__(self, *args, **kwargs):
         super(CrumbsMixin, self).__init__(*args, **kwargs)
-        if not hasattr(self, 'cache_prefix'):
-            self._cache_prefix = CACHE_PREFIX
         if not hasattr(self, 'cache_timeout'):
-            self._cache_timeout = CACHE_TIMEOUT
-
-    @property
-    def cache_prefix(self):
-        return self._cache_prefix
-
-    @property
-    def cache_timeout(self):
-        return self._cache_timeout
+            self.cache_timeout = CACHE_TIMEOUT
 
     def get_crumbs_cache_key(self):
         current_site = get_current_site(self.request)
 
-        return make_cache_key(
-            current_site.domain, self.request.path_info, self.cache_prefix)
-
-    def get_crumbs(self, context):
-        raise NotImplementedError
+        return make_cache_key(current_site.domain, self.request.path_info)
 
     def get_breadcrumbs(self, context):
         cache_key = self.get_crumbs_cache_key()
@@ -50,6 +36,9 @@ class CrumbsMixin(object):
             crumbs = self.get_crumbs(context)
             cache.set(cache_key, crumbs, self.cache_timeout)
         return crumbs
+
+    def get_crumbs(self, context):
+        raise NotImplementedError
 
     def render_to_response(self, context, **response_kwargs):
         if hasattr(self.request, 'breadcrumbs'):
