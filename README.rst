@@ -1,6 +1,6 @@
-=============
-Django Crumbs
-=============
+===================
+Django Crumbs Mixin
+===================
 
 Put short description here...
 
