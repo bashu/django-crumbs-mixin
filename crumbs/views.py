@@ -2,13 +2,11 @@
 
 import hashlib
 
-from django.conf import settings
 from django.core.cache import cache
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import get_current_site
 
-CACHE_PREFIX = getattr(settings, 'CRUMBS_CACHE_PREFIX', 'CRUMBS')
-CACHE_TIMEOUT = getattr(settings, 'CRUMBS_CACHE_TIMEOUT', 3600)
+from .settings import CACHE_PREFIX, CACHE_TIMEOUT
 
 
 def make_cache_key(domain, path, cache_prefix=CACHE_PREFIX):
