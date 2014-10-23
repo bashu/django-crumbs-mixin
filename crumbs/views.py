@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import get_current_site
 
-from .settings import CACHE_PREFIX, CACHE_TIMEOUT
+from .conf import CACHE_PREFIX, CACHE_TIMEOUT
 
 
 def make_cache_key(domain, path, cache_prefix=CACHE_PREFIX):
