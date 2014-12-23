@@ -24,7 +24,7 @@ class CrumbsMixin(object):
     def get_crumbs_cache_key(self):
         current_site = get_current_site(self.request)
 
-        return make_cache_key(current_site.domain, self.request.path_info)
+        return make_cache_key(current_site.domain, self.request.get_full_path())
 
     def get_breadcrumbs(self, context):
         cache_key = self.get_crumbs_cache_key()
