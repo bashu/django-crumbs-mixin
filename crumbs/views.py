@@ -6,7 +6,7 @@ from django.core.cache import cache
 from django.utils.encoding import smart_str
 from django.contrib.sites.models import get_current_site
 
-from .settings import CACHE_PREFIX, CACHE_TIMEOUT
+from .conf import CACHE_PREFIX, CACHE_TIMEOUT
 
 
 def make_cache_key(domain, path, cache_prefix=CACHE_PREFIX):
@@ -24,7 +24,7 @@ class CrumbsMixin(object):
     def get_crumbs_cache_key(self):
         current_site = get_current_site(self.request)
 
-        return make_cache_key(current_site.domain, self.request.path_info)
+        return make_cache_key(current_site.domain, self.request.get_full_path())
 
     def get_breadcrumbs(self, context):
         cache_key = self.get_crumbs_cache_key()
