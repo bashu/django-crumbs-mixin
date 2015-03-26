@@ -8,8 +8,8 @@ Put short description here...
    :target: https://travis-ci.org/bashu/django-crumbs-mixin
    :alt: Build Status
 
-.. image:: https://badge.fury.io/py/django-crumbs-mixin.png
-   :target: http://badge.fury.io/py/django-crumbs-mixin
+.. image:: https://pypip.in/v/django-crumbs-mixin/badge.png
+   :target: https://pypi.python.org/pypi/django-crumbs-mixin
    :alt: Latest Release
 
 .. image:: https://pypip.in/d/django-crumbs-mixin/badge.png
