@@ -5,13 +5,7 @@ Django Crumbs Mixin
 Put short description here...
 
 .. image:: https://travis-ci.org/bashu/django-crumbs-mixin.svg?branch=develop
-   :target: https://travis-ci.org/bashu/django-crumbs-mixin
-   :alt: Build Status
+    :target: https://travis-ci.org/bashu/django-crumbs-mixin
 
-.. image:: https://badge.fury.io/py/django-crumbs-mixin.png
-   :target: http://badge.fury.io/py/django-crumbs-mixin
-   :alt: Latest Release
-
-.. image:: https://pypip.in/d/django-crumbs-mixin/badge.png
-   :target: https://crate.io/packages/django-crumbs-mixin?version=latest
-   :alt: Downloads
+.. image:: https://landscape.io/github/bashu/django-crumbs-mixin/develop/landscape.svg?style=flat
+    :target: https://landscape.io/github/bashu/django-crumbs-mixin/develop
